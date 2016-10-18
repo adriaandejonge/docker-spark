@@ -2,12 +2,7 @@
 
 ```
 docker network create spark
-docker run -d -p 8080:8080 -p 7077:7077 --name master --net spark adejonge/spark:master
-docker run -ti --name client --net spark adejonge/spark bash
-[...]
-./bin/spark-submit \
-  --master spark://master:7077 \
-  examples/src/main/python/pi.py \
-  1000
+docker run -d -p 8080:8080 -p 7077:7077 --name master --net spark adejonge/spark:server
+docker run -v $(pwd)/target/scala-2.11:/app --net ek adejonge/spark:submit --class ekhackathon /app/ekhackathon_2.11-1.0.jar netcat 9999
 ```
 
